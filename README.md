@@ -10,51 +10,30 @@ An enterprise-grade, clinical decision support platform designed to streamline i
 
 ---
 
-## System Architecture & Port Allocation
-
-The repository is organized into five modular services operating concurrently:
+## System Architecture
 
 ```
-+-----------------------------------------------------------------------------------+
-|                     DISCHARGE PLANNER REPOSITORY ARCHITECTURE                     |
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|   +---------------------------------------------------------------------------+   |
-|   |                  discharge-frontend (Vite Dev / Port 5173)                |   |
-|   |         React Dashboard, Clinical CDS Banners, Plain-Language View       |   |
-|   +---------------------------------------------------------------------------+   |
-|                                       │                                           |
-|                   ┌───────────────────┼───────────────────┐                       |
-|                   ▼                   ▼                   ▼                       |
-|         +──────────────────+ +─────────────────+ +──────────────────+             |
-|         | discharge-auth-  | | discharge-      | | discharge-       |             |
-|         | service          | | backend-core    | | ai-orchestrator  |             |
-|         | (Port 8003)      | | (Port 8000)     | | (Port 8001)      |             |
-|         | JWT, RBAC, Auth  | | EHR, Tasks,     | | Claude LLM,      |             |
-|         |                  | | Bed Triage,     | | Evaluation,      |             |
-|         |                  | | Audit Log       | | Plain-Lang Synth |             |
-|         +──────────────────+ +─────────────────+ +──────────────────+             |
-|                                       │                   │                       |
-|                                       └─────────┬─────────┘                       |
-|                                                 ▼                                 |
-|                                      +─────────────────────+                      |
-|                                      | discharge-nlp-data  |                      |
-|                                      | (Port 8002)         |                      |
-|                                      | Clinical NLP Parser |                      |
-|                                      | Lab & Entity Extr.  |                      |
-|                                      +─────────────────────+                      |
-+-----------------------------------------------------------------------------------+
+[React/Vite Frontend :5173] ──► [Auth Service :8003]           (Person 5)
+        │                          (login, JWT issuing, RBAC roles)
+        ▼
+[Core Backend API :8000] ─────► [NLP / Synthetic Data :8002]   (Person 4)
+   (Person 2)                      (entity extraction,
+   - single-table DB                synthetic patients)
+   - guardrail enforcement   ─────► [AI Orchestrator :8001]     (Person 3)
+   - hospital ops aggregation        (multi-agent reasoning,
+   - cache + audit persistence       deterministic aggregator,
+                                      pre-generated cache)
 ```
 
 ### Microservice Catalog
 
-| Directory | Port | Primary Responsibilities | Tech Stack |
-| :--- | :--- | :--- | :--- |
-| [`discharge-frontend/`](discharge-frontend/) | **5173** | Multi-role clinician dashboard, patient risk triage, interactive task board, patient-facing plain language handouts. | React, Vite, Vanilla CSS |
-| [`discharge-backend-core/`](discharge-backend-core/) | **8000** | Patient registry, bed occupancy analytics, task state machine, physician sign-off gating, immutable audit trail. | Python 3.11, FastAPI, SQLite |
-| [`discharge-ai-orchestrator/`](discharge-ai-orchestrator/) | **8001** | LLM scoring pipeline, barrier classification, deterministic guardrail integration, plain-language instruction generator. | Python 3.11, FastAPI, Anthropic Claude |
-| [`discharge-nlp-data/`](discharge-nlp-data/) | **8002** | Synthetic EHR ingestion, clinical text parsing, abnormal lab & pending culture extraction, medical entity tagging. | Python 3.11, FastAPI, Regex/Spacy/Transformers |
-| [`discharge-auth-service/`](discharge-auth-service/) | **8003** | User authentication, HS256 JWT minting & verification, Role-Based Access Control (`Physician`, `Nurse`, `Pharmacist`, `Case_Manager`, `Admin`). | Python 3.11, FastAPI, PyJWT |
+| Directory | Port | Primary Responsibilities | Tech Stack | Lead |
+| :--- | :--- | :--- | :--- | :--- |
+| [`discharge-frontend/`](discharge-frontend/) | **5173** | Multi-role clinician dashboard, patient risk triage, interactive task board, patient-facing plain language handouts. | React, Vite, Vanilla CSS | Person 1 |
+| [`discharge-backend-core/`](discharge-backend-core/) | **8000** | Patient registry, bed occupancy analytics, task state machine, physician sign-off gating, immutable audit trail. | Python 3.11, FastAPI, SQLite | Person 2 |
+| [`discharge-ai-orchestrator/`](discharge-ai-orchestrator/) | **8001** | Multi-Agent reasoning engine with 4 concurrent domain agents (`asyncio.gather`), deterministic aggregator, plain-language synthesis. | Python 3.11, FastAPI, Anthropic Claude | Person 3 |
+| [`discharge-nlp-data/`](discharge-nlp-data/) | **8002** | Synthetic EHR ingestion, clinical text parsing, abnormal lab & pending culture extraction, medical entity tagging. | Python 3.11, FastAPI, NLP Parsers | Person 4 |
+| [`discharge-auth-service/`](discharge-auth-service/) | **8003** | User authentication, HS256 JWT minting & verification, Role-Based Access Control (`Physician`, `Nurse`, `Pharmacist`, `Case_Manager`, `Admin`). | Python 3.11, FastAPI, PyJWT | Person 5 |
 
 ---
 
@@ -101,7 +80,7 @@ pip install -r requirements.txt
 ```
 
 ### 4. Launch All Backend Microservices
-Run all 4 backend services with a single cross-platform command:
+Run all 4 backend services concurrently with a single cross-platform command:
 ```bash
 python run_all.py
 ```

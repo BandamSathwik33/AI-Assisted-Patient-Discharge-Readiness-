@@ -1,0 +1,28 @@
+{
+  "patient_id": "P-1005",
+  "structured_clinical_data": {
+    "conditions": [
+      { "name": "Severe Sepsis secondary to UTI", "icd10_hint": "A41.9" },
+      { "name": "Type 2 Diabetes Mellitus", "icd10_hint": "E11.9" },
+      { "name": "Acute Kidney Injury - resolving", "icd10_hint": "N17.9" }
+    ],
+    "medications": [
+      { "name": "Ceftriaxone", "dose": "2g", "frequency": "IV daily", "access_flag": null },
+      { "name": "Metformin", "dose": "500mg", "frequency": "BID", "access_flag": null }
+    ],
+    "vitals_summary": "BP 102/64, HR 88, RR 18, Temp 99.8F, SpO2 96% on room air. Borderline tachycardia.",
+    "labs_pending": [
+      "Blood culture (x2 sets, drawn 36h ago, final growth/sensitivity pending)",
+      "Urine culture (final organism identification pending)"
+    ],
+    "deidentified_text": "[PATIENT] 72yo presenting with urosepsis. Completed 48h IV antibiotics. Repeat cultures pending."
+  },
+  "raw_context": {
+    "admission_notes": "72-year-old male admitted with urosepsis, leukocytosis (WBC 18.2), and hypotension requiring fluid resuscitation. Clinical improvement noted but blood cultures drawn 36 hours ago remain pending final microbiology report.",
+    "medication_list": "Ceftriaxone 2g IV q24h; Metformin 500mg PO BID with meals; Lisinopril 10mg PO daily.",
+    "lab_summary": "WBC down to 11.4. Serum creatinine improved to 1.2. Blood culture x2 pending, drawn 2 days ago, no final result yet. Urine culture pending organism identification.",
+    "caregiver_notes": "Patient resides with adult daughter who can assist with transportation and recovery monitoring.",
+    "insurance_notes": "Commercial insurance active. Outpatient oral antibiotic transition plan pending finalized culture sensitivities.",
+    "days_admitted": 4
+  }
+}
