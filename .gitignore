@@ -28,3 +28,21 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Python
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+*/.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+*/.venv/
+venv/
+*/venv/
+*.sqlite3
+*.db
