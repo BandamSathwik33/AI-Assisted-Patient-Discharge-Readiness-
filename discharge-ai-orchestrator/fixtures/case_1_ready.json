@@ -1,0 +1,25 @@
+{
+  "patient_id": "P-1001",
+  "structured_clinical_data": {
+    "conditions": [
+      { "name": "Congestive Heart Failure exacerbation - resolved", "icd10_hint": "I50.9" },
+      { "name": "Essential Hypertension", "icd10_hint": "I10" }
+    ],
+    "medications": [
+      { "name": "Furosemide", "dose": "40mg", "frequency": "daily", "access_flag": null },
+      { "name": "Lisinopril", "dose": "10mg", "frequency": "daily", "access_flag": null },
+      { "name": "Metoprolol Succinate", "dose": "25mg", "frequency": "daily", "access_flag": null }
+    ],
+    "vitals_summary": "BP 118/76, HR 68, RR 16, SpO2 98% on room air, Afebrile. Stable last 48h.",
+    "labs_pending": [],
+    "deidentified_text": "[PATIENT] 68yo admitted with mild volume overload, now euvolemic following IV diuresis. Vitals stable."
+  },
+  "raw_context": {
+    "admission_notes": "68-year-old female admitted for acute decompensated CHF. Completed 3-day diuresis course. Weight down 3.2 kg, back to baseline dry weight. Ambulated hallway 200ft without dyspnea.",
+    "medication_list": "Furosemide 40mg PO daily with breakfast; Lisinopril 10mg PO daily; Metoprolol succinate 25mg PO daily; Potassium chloride 20mEq PO daily.",
+    "lab_summary": "BMP: Na 138, K 4.2, BUN 18, Cr 1.0 (baseline). BNP decreased from 850 to 180. All cultures negative. No pending labs.",
+    "caregiver_notes": "Patient lives with spouse who is fully capable and attended medication education. Home has zero steps.",
+    "insurance_notes": "Medicare Part A/B verified. Follow-up clinic appointment confirmed for 5 days post-discharge.",
+    "days_admitted": 3
+  }
+}

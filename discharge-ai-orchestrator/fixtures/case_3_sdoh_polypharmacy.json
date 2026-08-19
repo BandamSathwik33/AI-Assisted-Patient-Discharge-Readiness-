@@ -1,0 +1,27 @@
+{
+  "patient_id": "P-1006",
+  "structured_clinical_data": {
+    "conditions": [
+      { "name": "Atrial Fibrillation with Rapid Ventricular Response", "icd10_hint": "I48.0" },
+      { "name": "Major Depressive Disorder", "icd10_hint": "F32.9" },
+      { "name": "Osteoarthritis of right knee", "icd10_hint": "M17.11" }
+    ],
+    "medications": [
+      { "name": "Amiodarone", "dose": "200mg", "frequency": "daily", "access_flag": null },
+      { "name": "Citalopram", "dose": "40mg", "frequency": "daily", "access_flag": "flagged drug-drug interaction (QT prolongation)" },
+      { "name": "Apixaban", "dose": "5mg", "frequency": "BID", "access_flag": null },
+      { "name": "Tramadol", "dose": null, "frequency": null, "access_flag": "missing dose" }
+    ],
+    "vitals_summary": "BP 124/80, HR 74 in controlled Afib, RR 16, SpO2 97% on room air.",
+    "labs_pending": [],
+    "deidentified_text": "[PATIENT] 79yo admitted for rate control in Afib. Polypharmacy noted on home medication reconciliation."
+  },
+  "raw_context": {
+    "admission_notes": "79-year-old female admitted for symptomatic Atrial Fibrillation with RVR. Converted to rate-controlled Afib on Amiodarone. Multiple psychoactive and cardiac medications on active profile.",
+    "medication_list": "Amiodarone 200mg PO daily; Citalopram 40mg PO daily (flagged drug-drug interaction: severe additive QTc prolongation risk); Apixaban 5mg PO BID; Tramadol PRN (missing dose); Omeprazole 20mg daily.",
+    "lab_summary": "Electrolytes normal: K 4.1, Mg 2.2. Baseline ECG shows QTc 478ms. No pending lab tests.",
+    "caregiver_notes": "Patient lives alone on 3rd floor apartment with no elevator. Daughter out of state and unable to provide care. Patient has no confirmed home support arranged.",
+    "insurance_notes": "Prior authorization submitted for home physical therapy and nurse visits, status pending review.",
+    "days_admitted": 5
+  }
+}

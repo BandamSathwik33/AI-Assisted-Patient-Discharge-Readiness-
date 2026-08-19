@@ -8,7 +8,10 @@ dist/
 dist-ssr/
 */dist-ssr/
 
-# Environment files (keep .env and .env.example if needed for mock demo, ignore local overrides)
+# Environment files & secrets
+.env
+*.env
+!.env.example
 .env.local
 .env.*.local
 
@@ -19,10 +22,11 @@ yarn-error.log*
 pnpm-debug.log*
 *.log
 
-# Editor files
+# Editor files & OS
 .vscode/
 .idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
@@ -36,13 +40,20 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
+venv/
+ENV/
+.venv/
+*/.venv/
+env.bak/
+venv.bak/
+
+# Testing & Cache
 .pytest_cache/
 */.pytest_cache/
 .coverage
 htmlcov/
-.venv/
-*/.venv/
-venv/
-*/venv/
+
+# Databases
 *.sqlite3
 *.db
